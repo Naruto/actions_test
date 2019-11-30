@@ -17,7 +17,7 @@ jobs:
       env:
         file_name: "test-${GITHUB_SHA}"
       with:
-        name: ${{ file_name }}
+        name: ${{ env.file_name }}
         path: README.md
 
   cmd:
