@@ -15,7 +15,7 @@ jobs:
     - name: Upload Tools
       uses: actions/upload-artifact@v1
       env:
-        file_name: test-${GITHUB_SHA}
+        file_name: test-${{ matrix.platform }}-${{ github.sha }}
       with:
         name: $file_name
         path: README.md
@@ -32,8 +32,6 @@ jobs:
       run: echo %GITHUB_SHA%
     - name: Upload Tools
       uses: actions/upload-artifact@v1
-      env:
-        file_name: "test-%GITHUB_SHA%"
       with:
-        name: $env.file_name
+        name: test-${{ matrix.platform }}-${{ github.sha }}
         path: README.md
