@@ -32,9 +32,8 @@ jobs:
       run: echo %GITHUB_SHA%
     - name: Upload Tools
       uses: actions/upload-artifact@v1
-      shell: cmd
       env:
         file_name: "test-%GITHUB_SHA%"
       with:
-        name: ${{ file_name }}
+        name: ${{ env.file_name }}
         path: README.md
