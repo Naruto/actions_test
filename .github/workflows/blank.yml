@@ -3,16 +3,23 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  shell:
     strategy:
       matrix:
-        platform: [macos-latest, windows-latest, ubuntu-latest]
+        platform: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
       run: echo ${GITHUB_SHA}
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+
+  cmd:
+    strategy:
+      matrix:
+        platform: [windows-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo %GITHUB_SHA%
+
