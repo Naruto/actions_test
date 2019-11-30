@@ -15,9 +15,9 @@ jobs:
     - name: Upload Tools
       uses: actions/upload-artifact@v1
       env:
-        file_name: "test-${GITHUB_SHA}"
+        file_name: test-${GITHUB_SHA}
       with:
-        name: ${{ env.file_name }}
+        name: $file_name
         path: README.md
 
   cmd:
@@ -35,5 +35,5 @@ jobs:
       env:
         file_name: "test-%GITHUB_SHA%"
       with:
-        name: ${{ env.file_name }}
+        name: $env.file_name
         path: README.md
