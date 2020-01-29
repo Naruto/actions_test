@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  shell:
+    strategy:
+      matrix:
+        platform: [macos-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: sysctl -a | grep machdep.cpu.leaf7_features
+ 

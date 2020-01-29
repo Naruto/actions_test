@@ -3,16 +3,33 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  shell:
     strategy:
       matrix:
-        platform: [macos-latest, windows-latest]
+        platform: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
       run: echo ${GITHUB_SHA}
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    - name: Upload Tools
+      uses: actions/upload-artifact@v1
+      with:
+        name: test-${{ matrix.platform }}-${{ github.sha }}
+        path: README.md
+
+  cmd:
+    strategy:
+      matrix:
+        platform: [windows-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      shell: cmd
+      run: echo %GITHUB_SHA%
+    - name: Upload Tools
+      uses: actions/upload-artifact@v1
+      with:
+        name: test-${{ matrix.platform }}-${{ github.sha }}
+        path: README.md
